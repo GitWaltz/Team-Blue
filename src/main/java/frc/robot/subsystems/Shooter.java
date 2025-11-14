@@ -11,16 +11,16 @@ import frc.robot.ShooterConstants;
 public class Shooter extends SubsystemBase{
   
   private static final int SHOOTER_MOTOR_ID = 6;
-  private static final String CAN_BUS = "canivore"; // or "canivore"
+  private static final String CAN_BUS = "canivore"; // or "rio"
     public final MotionMagicVoltage m_request = new MotionMagicVoltage(0);
 // set target position to 100 rotations
 
-  private final TalonFX m_talonFX = new TalonFX(SHOOTER_MOTOR_ID, CAN_BUS);
+  private final TalonFX m_talonFX = new TalonFX(SHOOTER_MOTOR_ID, CAN_BUS); 
 public Shooter() {
 
   var talonFXConfigs = new TalonFXConfiguration();
-
-  var slot0Configs = talonFXConfigs.Slot0;
+//(just look up on websites for) 
+  var slot0Configs = talonFXConfigs.Slot0; 
 slot0Configs.kS = 0.25; // Add 0.25 V output to overcome static friction
 slot0Configs.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
 slot0Configs.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
@@ -40,10 +40,8 @@ m_talonFX.getConfigurator().apply(talonFXConfigs);
 
 
 
-final MotionMagicVoltage m_request = new MotionMagicVoltage(0);
+//final MotionMagicVoltage m_request = new MotionMagicVoltage(0);
 
-// set target position to 100 rotations
-//m_talonFX.setControl(m_request.withPosition(100));
 }
 public void moveToPosition(double rotations) {
   
@@ -52,6 +50,7 @@ public void moveToPosition(double rotations) {
 public void stop(){
   m_talonFX.stopMotor();
 }
+// restart position, if motor is already at 100 rot, then it won't rotate to 100 agian, so we need to reset position to 0
 public void zero(){
   m_talonFX.setPosition(0);
 }

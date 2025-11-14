@@ -23,7 +23,7 @@ import frc.robot.subsystems.Shooter;;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  private final Shooter shooter = new Shooter();
+  private final Shooter shooter = new Shooter(); //set up controller
     private final PS4Controller controller = new PS4Controller(0);
 
     public RobotContainer() {
@@ -32,13 +32,11 @@ public class RobotContainer {
 
     private void configureBindings() {
         // Bind Square button → move shooter to 100 rotations
-        new JoystickButton(controller, PS4Controller.Button.kSquare.value)
-
-          
+        new JoystickButton(controller, PS4Controller.Button.kSquare.value) // if square button, restart shooter pos then rot by 100
             .onTrue(new InstantCommand(() -> {shooter.zero();shooter.moveToPosition(100);}, shooter));
 
         // (Optional) Circle button → stop shooter
-        new JoystickButton(controller, PS4Controller.Button.kCircle.value)
+        new JoystickButton(controller, PS4Controller.Button.kCircle.value)//stops motor when spinning (*not from 100 - 0, gradual)
             .onTrue(new InstantCommand(() -> shooter.stop(), shooter));
     }
 }
