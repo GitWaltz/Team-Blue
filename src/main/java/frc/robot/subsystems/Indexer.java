@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.ShooterConstants;
 
-public class Shooter extends SubsystemBase{
+public class Indexer extends SubsystemBase{
   
   private static final int INDEXER_ID = 14;
   private static final String CAN_BUS = "canivore"; // or "rio"
