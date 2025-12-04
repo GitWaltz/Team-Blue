@@ -11,6 +11,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -24,7 +25,7 @@ import frc.robot.subsystems.Shooter;;
  */
 public class RobotContainer {
   private final Shooter shooter = new Shooter(); //set up controller
-    private final PS4Controller controller = new PS4Controller(0);
+    private final CommandPS4Controller controller = new CommandPS4Controller(0);
 
     public RobotContainer() {
         configureBindings();
@@ -32,11 +33,14 @@ public class RobotContainer {
 
     private void configureBindings() {
         // Bind Square button → move shooter to 100 rotations
+        controller.R2().onTrue(new  InstantCommand(() -> {shooter.Shoot();}, shooter));
+    /* 
         new JoystickButton(controller, PS4Controller.Button.kSquare.value) // if square button, restart shooter pos then rot by 100
             .onTrue(new InstantCommand(() -> {shooter.zero();shooter.moveToPosition(100);}, shooter));
 
         // (Optional) Circle button → stop shooter
         new JoystickButton(controller, PS4Controller.Button.kCircle.value)//stops motor when spinning (*not from 100 - 0, gradual)
             .onTrue(new InstantCommand(() -> shooter.stop(), shooter));
+        */
     }
 }

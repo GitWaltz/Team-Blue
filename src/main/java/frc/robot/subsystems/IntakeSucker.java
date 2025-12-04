@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.ShooterConstants;
 
-public class Shooter extends SubsystemBase{
+public class IntakeSucker extends SubsystemBase{
   
   private static final int INTAKE_SUCKER_ID = 13;
   private static final String CAN_BUS = "canivore"; // or "rio"
@@ -16,7 +16,7 @@ public class Shooter extends SubsystemBase{
 // set target position to 100 rotations
 
   private final TalonFX m_talonFX = new TalonFX(INTAKE_SUCKER_ID, CAN_BUS); 
-public Sucker() {
+public IntakeSucker() {
 
   var talonFXConfigs = new TalonFXConfiguration();
 //(just look up on websites for) 
