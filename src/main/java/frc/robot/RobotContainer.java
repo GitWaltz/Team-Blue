@@ -16,6 +16,45 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Shooter;;
+import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
+
+//this maybe works idk
+public class RobotContainer {
+
+    private final Shooter shooter = new Shooter();
+    private final CommandPS4Controller controller = new CommandPS4Controller(0);
+
+    // ➜ Add Swerve Drivetrain
+    private final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+
+    public RobotContainer() {
+        configureBindings();
+    }
+
+    private void configureBindings() {
+
+        // -------------------------------
+        //  SWERVE DRIVING WITH JOYSTICK
+        // -------------------------------
+        drivetrain.setDefaultCommand(
+            drivetrain.applyRequest(() ->
+                drivetrain.drive(
+                    -controller.getLeftY(),  // forward/back
+                    -controller.getLeftX(),  // strafe
+                    -controller.getRightX(), // rotate
+                    true,  // field-centric
+                    true   // open-loop
+                )
+            )
+        );
+
+        // -------------------------------
+        // SHOOTER BUTTON BINDINGS
+        // -------------------------------
+        controller.R2().onTrue(new InstantCommand(() -> shooter.Shoot(), shooter));
+    }
+}
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
